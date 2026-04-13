@@ -15,7 +15,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Sidebar */}
       <aside className="w-56 bg-gray-900 border-r border-gray-800 flex flex-col">
         <div className="px-5 py-6">
-          <span className="text-purple-400 font-bold text-lg tracking-wide">⚡ FGCU Esports</span>
+          <span className="text-purple-400 font-bold text-lg tracking-wide">
+            ⚡ FGCU Esports
+          </span>
         </div>
         <nav className="flex-1 px-3 space-y-1">
           {navItems.map((item) => (

@@ -12,7 +12,9 @@ export default function Login() {
     // REQ-01: validate minimum password policy (CON-03)
     const pwRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
     if (!pwRegex.test(form.password)) {
-      setError("Password must be 8+ chars with an uppercase, number, and special character.");
+      setError(
+        "Password must be 8+ chars with an uppercase, number, and special character.",
+      );
       return;
     }
     setError("");
@@ -24,8 +26,12 @@ export default function Login() {
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 w-full max-w-md shadow-xl">
         {/* Logo */}
         <div className="text-center mb-6">
-          <span className="text-purple-400 text-3xl font-extrabold tracking-wider">⚡ FGCU Esports</span>
-          <p className="text-gray-500 text-sm mt-1">AI-Powered Competitive Gaming Platform</p>
+          <span className="text-purple-400 text-3xl font-extrabold tracking-wider">
+            ⚡ FGCU Esports
+          </span>
+          <p className="text-gray-500 text-sm mt-1">
+            AI-Powered Competitive Gaming Platform
+          </p>
         </div>
 
         {/* Tab toggle */}
@@ -33,9 +39,14 @@ export default function Login() {
           {(["login", "register"] as const).map((m) => (
             <button
               key={m}
-              onClick={() => { setMode(m); setError(""); }}
+              onClick={() => {
+                setMode(m);
+                setError("");
+              }}
               className={`flex-1 py-2 rounded-md text-sm font-medium transition-colors ${
-                mode === m ? "bg-purple-700 text-white" : "text-gray-400 hover:text-white"
+                mode === m
+                  ? "bg-purple-700 text-white"
+                  : "text-gray-400 hover:text-white"
               }`}
             >
               {m === "login" ? "Sign In" : "Register"}
@@ -46,7 +57,9 @@ export default function Login() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {mode === "register" && (
             <div>
-              <label className="block text-xs text-gray-400 mb-1">Username</label>
+              <label className="block text-xs text-gray-400 mb-1">
+                Username
+              </label>
               <input
                 type="text"
                 required
