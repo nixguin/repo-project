@@ -64,15 +64,15 @@ export default function PlayerDashboard() {
               {recentMatches.map((m) => (
                 <tr
                   key={m.id}
-                  className="border-b border-gray-800 hover:bg-gray-800/50 transition-colors"
+                  className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
                 >
-                  <td className="py-2.5 text-white font-medium">
+                  <td className="py-2.5 text-gray-900 font-medium">
                     {m.opponent}
                   </td>
-                  <td className="py-2.5 text-gray-400">{m.map}</td>
-                  <td className="py-2.5 text-gray-400">{m.date}</td>
+                  <td className="py-2.5 text-gray-600">{m.map}</td>
+                  <td className="py-2.5 text-gray-600">{m.date}</td>
                   <td
-                    className={`py-2.5 font-semibold ${m.eloChange > 0 ? "text-green-400" : "text-red-400"}`}
+                    className={`py-2.5 font-semibold ${m.eloChange > 0 ? "text-fgcu-emerald" : "text-red-500"}`}
                   >
                     {m.eloChange > 0 ? `+${m.eloChange}` : m.eloChange}
                   </td>
