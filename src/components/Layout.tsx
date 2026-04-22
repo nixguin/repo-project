@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import fgcuLogo from "../assets/fgcu-logo-250h.jpg";
 
 const navItems = [
@@ -33,9 +33,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
         <div className="px-5 py-6 flex items-center justify-between">
-          <div className="bg-white rounded-md px-2 py-1">
-            <img src={fgcuLogo} alt="FGCU" className="h-8 w-auto" />
-          </div>
+          <Link to="/" onClick={closeSidebar} className="block">
+            <div className="bg-white rounded-md px-2 py-1">
+              <img src={fgcuLogo} alt="FGCU" className="h-8 w-auto" />
+            </div>
+          </Link>
           <button
             onClick={closeSidebar}
             className="md:hidden text-white/50 hover:text-white text-xl leading-none"
@@ -93,9 +95,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           >
             ☰
           </button>
-          <div className="bg-white rounded-md px-2 py-0.5">
-            <img src={fgcuLogo} alt="FGCU" className="h-7 w-auto" />
-          </div>
+          <Link to="/" className="block">
+            <div className="bg-white rounded-md px-2 py-0.5">
+              <img src={fgcuLogo} alt="FGCU" className="h-7 w-auto" />
+            </div>
+          </Link>
         </header>
         <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
       </div>

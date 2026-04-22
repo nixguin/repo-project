@@ -45,7 +45,7 @@ export default function HomePage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="bg-cobalt text-white px-6 py-16 text-center">
+      <section className="bg-cobalt text-white px-4 sm:px-6 py-10 sm:py-16 text-center">
         <h1 className="text-4xl font-extrabold mb-3 tracking-tight">
           Compete. Connect. Represent FGCU.
         </h1>
@@ -120,7 +120,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Two ways to play ── */}
-      <section className="bg-white border-t border-b border-gray-200 py-10 px-6">
+      <section className="bg-white border-t border-b border-gray-200 py-6 sm:py-10 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-xl font-bold text-cobalt mb-1 text-center">Two ways to play</h2>
           <p className="text-gray-500 text-sm text-center mb-6">
@@ -162,8 +162,8 @@ export default function HomePage() {
       </section>
 
       {/* ── Discord CTA ── */}
-      <section className="max-w-4xl mx-auto w-full px-6 py-10">
-        <div className="bg-indigo-900 rounded-2xl p-7 flex flex-col sm:flex-row items-center justify-between gap-5">
+      <section className="max-w-4xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-10">
+        <div className="bg-indigo-900 rounded-2xl p-5 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5">
           <div>
             <h3 className="text-white font-bold text-lg mb-1">We live in Discord too</h3>
             <p className="text-indigo-200 text-sm max-w-md">

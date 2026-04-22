@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import Layout from "../components/Layout";
 import { events, type GameEvent } from "../data/mockData";
 
@@ -98,7 +98,7 @@ export default function EventsPage() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold text-cobalt mb-5">Events</h1>
+      <h1 className="text-2xl font-bold text-cobalt mb-3 sm:mb-5">Events</h1>
 
       {/* â”€â”€ ESPORT-42: Prominent upcoming event hero â”€â”€ */}
       {(liveEvent ?? nextEvent) &&
@@ -107,7 +107,7 @@ export default function EventsPage() {
           const isLive = hero.status === "live";
           return (
             <div
-              className={`rounded-2xl p-5 mb-6 border ${
+              className={`rounded-xl sm:rounded-2xl p-4 sm:p-5 mb-4 sm:mb-6 border ${
                 isLive
                   ? "bg-yellow-50 border-yellow-300"
                   : "bg-cobalt/5 border-cobalt/20"
@@ -173,7 +173,7 @@ export default function EventsPage() {
         })()}
 
       {/* â”€â”€ ESPORT-39: Filter tabs including casual / competitive â”€â”€ */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
         {(
           [
             "all",
@@ -228,7 +228,7 @@ export default function EventsPage() {
             (idx === 0 || filtered[idx - 1].status !== "completed");
 
           return (
-            <>
+            <Fragment key={ev.id}>
               {showPastDivider && (
                 <div className="flex items-center gap-3 pt-2">
                   <div className="flex-1 h-px bg-gray-300" />
@@ -384,7 +384,7 @@ export default function EventsPage() {
                 </div>
               )}
             </div>
-            </>
+            </Fragment>
           );
         })}
       </div>
