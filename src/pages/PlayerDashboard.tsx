@@ -23,31 +23,19 @@ export default function PlayerDashboard() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold text-white mb-6">Player Dashboard</h1>
+      <h1 className="text-2xl font-bold text-cobalt mb-6">Player Dashboard</h1>
 
       {/* Top stat cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         {[
-          {
-            label: "ELO Rating",
-            value: currentPlayer.elo,
-            color: "text-purple-400",
-          },
-          { label: "Wins", value: currentPlayer.wins, color: "text-green-400" },
-          {
-            label: "Losses",
-            value: currentPlayer.losses,
-            color: "text-red-400",
-          },
-          {
-            label: "Win Rate",
-            value: `${currentPlayer.winRate}%`,
-            color: "text-yellow-400",
-          },
+          { label: "ELO Rating", value: currentPlayer.elo, color: "text-cobalt" },
+          { label: "Wins", value: currentPlayer.wins, color: "text-fgcu-emerald" },
+          { label: "Losses", value: currentPlayer.losses, color: "text-red-500" },
+          { label: "Win Rate", value: `${currentPlayer.winRate}%`, color: "text-yellow-600" },
         ].map((card) => (
           <div
             key={card.label}
-            className="bg-gray-900 border border-gray-800 rounded-xl p-4"
+            className="bg-white border border-gray-200 rounded-xl p-4"
           >
             <p className="text-xs text-gray-500 mb-1">{card.label}</p>
             <p className={`text-2xl font-bold ${card.color}`}>{card.value}</p>
@@ -57,13 +45,13 @@ export default function PlayerDashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Match History — US-07 */}
-        <div className="lg:col-span-2 bg-gray-900 border border-gray-800 rounded-xl p-5">
-          <h2 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">
+        <div className="lg:col-span-2 bg-white border border-gray-200 rounded-xl p-5">
+          <h2 className="text-sm font-semibold text-gray-700 mb-4 uppercase tracking-wide">
             Recent Match History
           </h2>
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-gray-500 text-xs border-b border-gray-800">
+              <tr className="text-gray-500 text-xs border-b border-gray-200">
                 <th className="text-left py-2">Opponent</th>
                 <th className="text-left py-2">Map</th>
                 <th className="text-left py-2">Date</th>
@@ -92,8 +80,8 @@ export default function PlayerDashboard() {
                     <span
                       className={`px-2 py-0.5 rounded-full text-xs font-medium ${
                         m.result === "Win"
-                          ? "bg-green-900/50 text-green-400"
-                          : "bg-red-900/50 text-red-400"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-600"
                       }`}
                     >
                       {m.result}
@@ -103,7 +91,7 @@ export default function PlayerDashboard() {
                     {m.result === "Loss" && (
                       <button
                         onClick={() => setDisputeMatch(m.id)}
-                        className="text-xs text-yellow-400 hover:text-yellow-300 underline"
+                        className="text-xs text-yellow-600 hover:text-yellow-500 underline"
                       >
                         Dispute
                       </button>
@@ -118,15 +106,15 @@ export default function PlayerDashboard() {
         {/* Right column */}
         <div className="space-y-4">
           {/* AI Matchmaking — US-02 / REQ-02 */}
-          <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
-            <h2 className="text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wide">
+          <div className="bg-white border border-gray-200 rounded-xl p-5">
+            <h2 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
               AI Matchmaking
             </h2>
             <p className="text-xs text-gray-500 mb-4">
               Matches within ELO ±150 and &lt;80ms ping (REQ-02)
             </p>
             {found ? (
-              <div className="bg-green-900/30 border border-green-700 rounded-lg p-3 text-sm text-green-400">
+              <div className="bg-green-50 border border-green-300 rounded-lg p-3 text-sm text-green-700">
                 ✓ Match found! <span className="font-bold">GhostTide</span> —
                 Lobby link sent.
               </div>
@@ -134,7 +122,7 @@ export default function PlayerDashboard() {
               <button
                 onClick={handleFindMatch}
                 disabled={finding}
-                className="w-full bg-purple-700 hover:bg-purple-600 disabled:opacity-60 transition-colors text-white font-semibold py-3 rounded-lg text-sm"
+                className="w-full bg-fgcu-emerald hover:bg-fgcu-emerald-hover disabled:opacity-60 transition-colors text-white font-semibold py-3 rounded-lg text-sm"
               >
                 {finding ? "Searching…" : "Find Match"}
               </button>
@@ -142,8 +130,8 @@ export default function PlayerDashboard() {
           </div>
 
           {/* Upcoming Matches */}
-          <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
-            <h2 className="text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wide">
+          <div className="bg-white border border-gray-200 rounded-xl p-5">
+            <h2 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
               Upcoming Matches
             </h2>
             <div className="space-y-3">
@@ -153,10 +141,10 @@ export default function PlayerDashboard() {
                   className="flex justify-between items-center text-sm"
                 >
                   <div>
-                    <p className="text-white font-medium">vs {m.opponent}</p>
+                    <p className="text-gray-900 font-medium">vs {m.opponent}</p>
                     <p className="text-gray-500 text-xs">{m.game}</p>
                   </div>
-                  <span className="text-gray-400 text-xs text-right">
+                  <span className="text-gray-500 text-xs text-right">
                     {m.time}
                   </span>
                 </div>
@@ -165,10 +153,10 @@ export default function PlayerDashboard() {
           </div>
 
           {/* Player profile badge */}
-          <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+          <div className="bg-white border border-gray-200 rounded-xl p-5">
             <p className="text-xs text-gray-500 mb-1">Signed in as</p>
-            <p className="text-white font-semibold">{currentPlayer.username}</p>
-            <p className="text-purple-400 text-xs">
+            <p className="text-gray-900 font-semibold">{currentPlayer.username}</p>
+            <p className="text-fgcu-emerald text-xs">
               {currentPlayer.game} · ELO {currentPlayer.elo}
             </p>
           </div>

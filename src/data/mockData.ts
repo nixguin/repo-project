@@ -118,6 +118,8 @@ export type GameEvent = {
     format: string;
     description: string;
     organizer: string;
+    location: string;                          // ESPORT-43
+    type: "competitive" | "casual";            // ESPORT-39
 };
 
 export const events: GameEvent[] = [
@@ -134,6 +136,8 @@ export const events: GameEvent[] = [
         format: "Double Elimination",
         description: "Open Valorant tournament for all FGCU students. Top 3 teams split the prize pool.",
         organizer: "TourneyKing",
+        location: "Lutgert Hall – Room 1201",
+        type: "competitive",
     },
     {
         id: "e2",
@@ -148,6 +152,8 @@ export const events: GameEvent[] = [
         format: "Single Elimination",
         description: "Fast-paced 2v2 Rocket League showdown. Brackets seeded by rank.",
         organizer: "TourneyKing",
+        location: "Student Union – Lab B",
+        type: "competitive",
     },
     {
         id: "e3",
@@ -162,6 +168,8 @@ export const events: GameEvent[] = [
         format: "Double Elimination",
         description: "Weekly Smash Bros local. Open to all skill levels.",
         organizer: "TourneyKing",
+        location: "Rec Center – Gaming Lounge",
+        type: "casual",
     },
     {
         id: "e4",
@@ -176,6 +184,8 @@ export const events: GameEvent[] = [
         format: "Round Robin + Playoffs",
         description: "Team-based LoL tournament. Register a full 5-man roster.",
         organizer: "TourneyKing",
+        location: "Lutgert Hall – Room 1201",
+        type: "competitive",
     },
     {
         id: "e5",
@@ -190,5 +200,23 @@ export const events: GameEvent[] = [
         format: "Group Stage + Bracket",
         description: "Inter-college Overwatch 2 Cup. Represent FGCU against other Florida schools.",
         organizer: "TourneyKing",
+        location: "Online – Discord Server",
+        type: "competitive",
+    },
+    {
+        id: "e6",
+        name: "Friday Fun Night – Mario Kart",
+        game: "Mario Kart 8 Deluxe",
+        date: "Apr 25, 2026 · 7:00 PM",
+        registrationDeadline: "Apr 25, 2026",
+        status: "upcoming",
+        maxPlayers: 12,
+        registeredPlayers: 5,
+        prizePool: "No prize – just vibes",
+        format: "Free-for-All",
+        description: "Drop in, grab a controller, and race. No sign-up required on the day of the event.",
+        organizer: "TourneyKing",
+        location: "Rec Center – Gaming Lounge",
+        type: "casual",
     },
 ];

@@ -38,44 +38,44 @@ export default function DisputeModal({ matchId, onClose }: Props) {
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4">
-      <div className="bg-gray-900 border border-gray-700 rounded-2xl p-6 w-full max-w-md shadow-2xl">
+      <div className="bg-white border border-gray-200 rounded-2xl p-6 w-full max-w-md shadow-xl">
         <div className="flex justify-between items-start mb-4">
-          <h2 className="text-lg font-bold text-white">Dispute Match Result</h2>
+          <h2 className="text-lg font-bold text-cobalt">File a Dispute</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-white text-xl leading-none"
+            className="text-gray-400 hover:text-gray-700 text-2xl leading-none"
           >
             ×
           </button>
         </div>
 
         <p className="text-xs text-gray-500 mb-1">
-          Match ID: <span className="text-gray-300">{matchId}</span>
+          Match ID: <span className="text-gray-700 font-mono">{matchId}</span>
         </p>
 
         {/* Countdown timer */}
         <div
-          className={`flex items-center gap-2 mb-5 mt-3 p-3 rounded-lg ${expired ? "bg-red-900/30 border border-red-700" : "bg-yellow-900/20 border border-yellow-700"}`}
+          className={`flex items-center gap-2 mb-5 mt-3 p-3 rounded-lg border ${expired ? "bg-red-50 border-red-200" : "bg-yellow-50 border-yellow-200"}`}
         >
-          <span className="text-sm text-gray-400">Challenge window:</span>
+          <span className="text-sm text-gray-600">Challenge window:</span>
           <span
-            className={`font-mono font-bold text-lg ${expired ? "text-red-400" : "text-yellow-400"}`}
+            className={`font-mono font-bold text-lg ${expired ? "text-red-500" : "text-yellow-600"}`}
           >
             {minutes}:{seconds}
           </span>
           {expired && (
-            <span className="text-red-400 text-xs ml-auto">Window closed</span>
+            <span className="text-red-500 text-xs ml-auto">Window closed</span>
           )}
         </div>
 
         {submitted ? (
-          <div className="bg-green-900/30 border border-green-700 rounded-lg p-4 text-green-400 text-sm text-center">
+          <div className="bg-green-50 border border-green-300 rounded-lg p-4 text-green-700 text-sm text-center">
             ✓ Dispute submitted. The organizer has been notified.
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs text-gray-400 mb-1">
+              <label className="block text-xs text-gray-600 mb-1">
                 Reason / Notes
               </label>
               <textarea
@@ -84,25 +84,25 @@ export default function DisputeModal({ matchId, onClose }: Props) {
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 disabled={expired}
-                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-yellow-500 disabled:opacity-50 resize-none"
+                className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-fgcu-emerald disabled:opacity-50 resize-none"
                 placeholder="Describe the issue…"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-400 mb-1">
+              <label className="block text-xs text-gray-600 mb-1">
                 Evidence (screenshot URL or description)
               </label>
               <input
                 type="text"
                 disabled={expired}
-                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-yellow-500 disabled:opacity-50"
+                className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-fgcu-emerald disabled:opacity-50"
                 placeholder="https://i.imgur.com/…"
               />
             </div>
             <button
               type="submit"
               disabled={expired}
-              className="w-full bg-yellow-600 hover:bg-yellow-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-white font-semibold py-2.5 rounded-lg text-sm"
+              className="w-full bg-cobalt hover:bg-cobalt-hover disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-white font-semibold py-2.5 rounded-lg text-sm"
             >
               Submit Dispute
             </button>

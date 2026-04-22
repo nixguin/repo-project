@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+/* FGCU Esports brand palette */
+@theme {
+  --color-cobalt: #002D72;
+  --color-cobalt-hover: #003d9e;
+  --color-fgcu-emerald: #007749;
+  --color-fgcu-emerald-hover: #005c38;
+  --color-fgcu-gold: #B9975B;
+  --color-fgcu-gold-hover: #9a7a3d;
+  --color-softgray: #F4F4F4;
+}

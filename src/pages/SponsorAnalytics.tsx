@@ -41,13 +41,13 @@ export default function SponsorAnalytics() {
     <Layout>
       <div className="flex justify-between items-start mb-6 flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-white">Sponsor Analytics</h1>
+          <h1 className="text-2xl font-bold text-cobalt">Sponsor Analytics</h1>
           <p className="text-sm text-gray-500 mt-0.5">{c.name}</p>
         </div>
         {/* REQ-11: CSV export */}
         <button
           onClick={exportCSV}
-          className="bg-gray-800 hover:bg-gray-700 border border-gray-700 text-sm text-gray-300 px-4 py-2 rounded-lg transition-colors"
+          className="bg-white border border-gray-300 text-sm text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-lg transition-colors"
         >
           ↓ Export CSV
         </button>
@@ -56,26 +56,14 @@ export default function SponsorAnalytics() {
       {/* KPI Cards — REQ-05 */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         {[
-          {
-            label: "Total Impressions",
-            value: c.impressions.toLocaleString(),
-            color: "text-purple-400",
-          },
-          { label: "CTR", value: `${c.ctr}%`, color: "text-blue-400" },
-          {
-            label: "Total Clicks",
-            value: c.clicks.toLocaleString(),
-            color: "text-green-400",
-          },
-          {
-            label: "Engagement Rate",
-            value: `${c.engagement}%`,
-            color: "text-yellow-400",
-          },
+          { label: "Total Impressions", value: c.impressions.toLocaleString(), color: "text-cobalt" },
+          { label: "CTR", value: `${c.ctr}%`, color: "text-fgcu-emerald" },
+          { label: "Total Clicks", value: c.clicks.toLocaleString(), color: "text-fgcu-emerald" },
+          { label: "Engagement Rate", value: `${c.engagement}%`, color: "text-yellow-600" },
         ].map((card) => (
           <div
             key={card.label}
-            className="bg-gray-900 border border-gray-800 rounded-xl p-4"
+            className="bg-white border border-gray-200 rounded-xl p-4"
           >
             <p className="text-xs text-gray-500 mb-1">{card.label}</p>
             <p className={`text-2xl font-bold ${card.color}`}>{card.value}</p>
@@ -84,20 +72,20 @@ export default function SponsorAnalytics() {
       </div>
 
       {/* Budget bar */}
-      <div className="bg-gray-900 border border-gray-800 rounded-xl p-5 mb-6">
+      <div className="bg-white border border-gray-200 rounded-xl p-5 mb-6">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm text-gray-400">Budget Usage</span>
-          <span className="text-sm text-white font-semibold">
+          <span className="text-sm text-gray-600">Budget Usage</span>
+          <span className="text-sm text-gray-900 font-semibold">
             ${c.spent.toLocaleString()} / ${c.budget.toLocaleString()}
           </span>
         </div>
-        <div className="w-full bg-gray-800 rounded-full h-3">
+        <div className="w-full bg-gray-200 rounded-full h-3">
           <div
-            className="bg-purple-600 h-3 rounded-full transition-all"
+            className="bg-fgcu-emerald h-3 rounded-full transition-all"
             style={{ width: `${budgetPct}%` }}
           />
         </div>
-        <p className="text-xs text-gray-600 mt-1">
+        <p className="text-xs text-gray-400 mt-1">
           {budgetPct}% spent · {c.reach.toLocaleString()} total reach
         </p>
       </div>
@@ -105,9 +93,9 @@ export default function SponsorAnalytics() {
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Impressions over time */}
-        <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+        <div className="bg-white border border-gray-200 rounded-xl p-5">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-sm font-semibold text-gray-300 uppercase tracking-wide">
+            <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
               Impressions
             </h2>
             <div className="flex gap-1">
@@ -115,7 +103,7 @@ export default function SponsorAnalytics() {
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={`text-xs px-2 py-0.5 rounded ${filter === f ? "bg-purple-700 text-white" : "text-gray-500 hover:text-white"}`}
+                  className={`text-xs px-2 py-0.5 rounded ${filter === f ? "bg-fgcu-emerald text-white" : "text-gray-400 hover:text-gray-700"}`}
                 >
                   {f.charAt(0).toUpperCase() + f.slice(1)}
                 </button>
@@ -126,24 +114,24 @@ export default function SponsorAnalytics() {
             <AreaChart data={dailyMetrics}>
               <defs>
                 <linearGradient id="impGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#7c3aed" stopOpacity={0.4} />
-                  <stop offset="95%" stopColor="#7c3aed" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#007749" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#007749" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-              <XAxis dataKey="day" tick={{ fill: "#6b7280", fontSize: 11 }} />
-              <YAxis tick={{ fill: "#6b7280", fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <XAxis dataKey="day" tick={{ fill: "#9ca3af", fontSize: 11 }} />
+              <YAxis tick={{ fill: "#9ca3af", fontSize: 11 }} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#111827",
-                  border: "1px solid #374151",
+                  backgroundColor: "#ffffff",
+                  border: "1px solid #e5e7eb",
                   borderRadius: 8,
                 }}
               />
               <Area
                 type="monotone"
                 dataKey="impressions"
-                stroke="#7c3aed"
+                stroke="#007749"
                 fill="url(#impGrad)"
                 strokeWidth={2}
               />
@@ -152,19 +140,19 @@ export default function SponsorAnalytics() {
         </div>
 
         {/* Clicks + Engagement */}
-        <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
-          <h2 className="text-sm font-semibold text-gray-300 uppercase tracking-wide mb-4">
+        <div className="bg-white border border-gray-200 rounded-xl p-5">
+          <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">
             Clicks &amp; Engagement
           </h2>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={dailyMetrics}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-              <XAxis dataKey="day" tick={{ fill: "#6b7280", fontSize: 11 }} />
-              <YAxis tick={{ fill: "#6b7280", fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <XAxis dataKey="day" tick={{ fill: "#9ca3af", fontSize: 11 }} />
+              <YAxis tick={{ fill: "#9ca3af", fontSize: 11 }} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#111827",
-                  border: "1px solid #374151",
+                  backgroundColor: "#ffffff",
+                  border: "1px solid #e5e7eb",
                   borderRadius: 8,
                 }}
               />
