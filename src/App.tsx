@@ -1,13 +1,12 @@
 // ESPORT-21: lazy-load every route so only the current page's JS is parsed on first render
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
-const Login            = lazy(() => import("./pages/Login"));
-const PlayerDashboard  = lazy(() => import("./pages/PlayerDashboard"));
-const EventsPage       = lazy(() => import("./pages/EventsPage"));
+const HomePage         = lazy(() => import("./pages/HomePage"));const Login = lazy(() => import("./pages/Login"));
+const PlayerDashboard = lazy(() => import("./pages/PlayerDashboard"));
+const EventsPage = lazy(() => import("./pages/EventsPage"));
 const TournamentBracket = lazy(() => import("./pages/TournamentBracket"));
 const SponsorAnalytics = lazy(() => import("./pages/SponsorAnalytics"));
-const AdminPanel       = lazy(() => import("./pages/AdminPanel"));
+const AdminPanel = lazy(() => import("./pages/AdminPanel"));
 
 function PageLoader() {
   return (
@@ -22,7 +21,8 @@ export default function App() {
     <BrowserRouter>
       <Suspense fallback={<PageLoader />}>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<PlayerDashboard />} />
           <Route path="/events" element={<EventsPage />} />
           <Route path="/bracket" element={<TournamentBracket />} />

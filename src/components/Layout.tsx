@@ -66,10 +66,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {/* ESPORT-26: system availability indicator */}
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
-            <span className="text-xs text-white/50">All systems operational</span>
+            <span className="text-xs text-white/50">
+              All systems operational
+            </span>
           </div>
           <button
-            onClick={() => { closeSidebar(); navigate("/"); }}
+            onClick={() => {
+              closeSidebar();
+              navigate("/");
+            }}
             className="w-full text-sm text-white/50 hover:text-red-300 transition-colors text-left"
           >
             ← Logout

@@ -120,6 +120,7 @@ export type GameEvent = {
     organizer: string;
     location: string;                          // ESPORT-43
     type: "competitive" | "casual";            // ESPORT-39
+    lineup?: string[];                         // ESPORT-45: registered teams/players for competitive events
 };
 
 export const events: GameEvent[] = [
@@ -138,6 +139,7 @@ export const events: GameEvent[] = [
         organizer: "TourneyKing",
         location: "Lutgert Hall – Room 1201",
         type: "competitive",
+        lineup: ["Team Omega", "Team Nexus", "The Rift Kings", "FGCU Legends", "GhostTide Squad"],
     },
     {
         id: "e2",
@@ -154,6 +156,7 @@ export const events: GameEvent[] = [
         organizer: "TourneyKing",
         location: "Student Union – Lab B",
         type: "competitive",
+        lineup: ["NovaStar / BlazeFX", "IronClad / ColdSnap", "VoidWalker / DustyAim", "GhostTide / PixelRush"],
     },
     {
         id: "e3",
@@ -186,6 +189,7 @@ export const events: GameEvent[] = [
         organizer: "TourneyKing",
         location: "Lutgert Hall – Room 1201",
         type: "competitive",
+        lineup: ["Team Omega", "Gulf Coast Wolves"],
     },
     {
         id: "e5",
@@ -202,6 +206,7 @@ export const events: GameEvent[] = [
         organizer: "TourneyKing",
         location: "Online – Discord Server",
         type: "competitive",
+        lineup: ["FGCU Eagles", "Gulf Coast Raiders"],
     },
     {
         id: "e6",

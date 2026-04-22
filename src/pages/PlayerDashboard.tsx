@@ -28,10 +28,26 @@ export default function PlayerDashboard() {
       {/* Top stat cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         {[
-          { label: "ELO Rating", value: currentPlayer.elo, color: "text-cobalt" },
-          { label: "Wins", value: currentPlayer.wins, color: "text-fgcu-emerald" },
-          { label: "Losses", value: currentPlayer.losses, color: "text-red-500" },
-          { label: "Win Rate", value: `${currentPlayer.winRate}%`, color: "text-yellow-600" },
+          {
+            label: "ELO Rating",
+            value: currentPlayer.elo,
+            color: "text-cobalt",
+          },
+          {
+            label: "Wins",
+            value: currentPlayer.wins,
+            color: "text-fgcu-emerald",
+          },
+          {
+            label: "Losses",
+            value: currentPlayer.losses,
+            color: "text-red-500",
+          },
+          {
+            label: "Win Rate",
+            value: `${currentPlayer.winRate}%`,
+            color: "text-yellow-600",
+          },
         ].map((card) => (
           <div
             key={card.label}
@@ -155,7 +171,9 @@ export default function PlayerDashboard() {
           {/* Player profile badge */}
           <div className="bg-white border border-gray-200 rounded-xl p-5">
             <p className="text-xs text-gray-500 mb-1">Signed in as</p>
-            <p className="text-gray-900 font-semibold">{currentPlayer.username}</p>
+            <p className="text-gray-900 font-semibold">
+              {currentPlayer.username}
+            </p>
             <p className="text-fgcu-emerald text-xs">
               {currentPlayer.game} · ELO {currentPlayer.elo}
             </p>

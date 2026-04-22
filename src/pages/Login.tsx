@@ -34,7 +34,7 @@ export default function Login() {
         <div className="flex flex-col items-center mb-6">
           <img src={fgcuLogo} alt="FGCU" className="h-16 w-auto mb-2" />
           <p className="text-gray-500 text-sm">
-            AI-Powered Competitive Gaming Platform
+            Sign in to track ELO, register for events, and manage your team.
           </p>
         </div>
 
@@ -132,24 +132,42 @@ export default function Login() {
 
         {/* ESPORT-13: demo credential hint */}
         <div className="mt-5 bg-gray-50 border border-gray-200 rounded-lg px-4 py-3">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-1.5">Demo credentials</p>
+          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-1.5">
+            Demo credentials
+          </p>
           <div className="space-y-1 text-xs text-gray-600">
-            <p><span className="text-gray-400">Player →</span> nova@fgcu.edu</p>
-            <p><span className="text-gray-400">Officer →</span> tk@fgcu.edu</p>
-            <p className="text-gray-400 mt-1">Password: <span className="font-mono">Test1@abc</span></p>
+            <p>
+              <span className="text-gray-400">Player →</span> nova@fgcu.edu
+            </p>
+            <p>
+              <span className="text-gray-400">Officer →</span> tk@fgcu.edu
+            </p>
+            <p className="text-gray-400 mt-1">
+              Password: <span className="font-mono">Test1@abc</span>
+            </p>
           </div>
         </div>
 
         {/* ESPORT-44: built on zero-cost tools */}
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           {["React", "Vite", "Tailwind CSS", "GitHub Pages"].map((tool) => (
-            <span key={tool} className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full border border-gray-200">
+            <span
+              key={tool}
+              className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full border border-gray-200"
+            >
               {tool}
             </span>
           ))}
         </div>
-        <p className="text-center text-xs text-gray-400 mt-2">100% free & open-source stack (ESPORT-44)</p>
-      </div>
+        <p className="text-center text-xs text-gray-400 mt-2">
+          100% free & open-source stack (ESPORT-44)
+        </p>        {/* Guest browse link */}
+        <p className="text-center text-xs text-gray-500 mt-4">
+          Just browsing?{" "}
+          <a href="/events" className="text-fgcu-emerald hover:underline font-medium">
+            View events without signing in →
+          </a>
+        </p>      </div>
     </div>
   );
 }

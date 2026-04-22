@@ -56,10 +56,22 @@ export default function SponsorAnalytics() {
       {/* KPI Cards — REQ-05 */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         {[
-          { label: "Total Impressions", value: c.impressions.toLocaleString(), color: "text-cobalt" },
+          {
+            label: "Total Impressions",
+            value: c.impressions.toLocaleString(),
+            color: "text-cobalt",
+          },
           { label: "CTR", value: `${c.ctr}%`, color: "text-fgcu-emerald" },
-          { label: "Total Clicks", value: c.clicks.toLocaleString(), color: "text-fgcu-emerald" },
-          { label: "Engagement Rate", value: `${c.engagement}%`, color: "text-yellow-600" },
+          {
+            label: "Total Clicks",
+            value: c.clicks.toLocaleString(),
+            color: "text-fgcu-emerald",
+          },
+          {
+            label: "Engagement Rate",
+            value: `${c.engagement}%`,
+            color: "text-yellow-600",
+          },
         ].map((card) => (
           <div
             key={card.label}

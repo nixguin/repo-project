@@ -1,6 +1,11 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
-import { adminUsers, events, type AdminUser, type GameEvent } from "../data/mockData";
+import {
+  adminUsers,
+  events,
+  type AdminUser,
+  type GameEvent,
+} from "../data/mockData";
 
 const roleColors: Record<AdminUser["role"], string> = {
   player: "bg-blue-100 text-blue-700",
@@ -24,7 +29,7 @@ export default function AdminPanel() {
   // ── Event management state ──────────────────────────────────────────────
   const [eventList, setEventList] = useState<GameEvent[]>(events);
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null);   // ESPORT-38
+  const [editingId, setEditingId] = useState<string | null>(null); // ESPORT-38
   const blankForm = {
     name: "",
     game: "",
@@ -51,7 +56,9 @@ export default function AdminPanel() {
       registeredPlayers: 0,
     };
     setEventList((prev) => [newEvent, ...prev]);
-    logAction(`[${new Date().toLocaleTimeString()}] Created event: ${form.name}`);
+    logAction(
+      `[${new Date().toLocaleTimeString()}] Created event: ${form.name}`,
+    );
     setForm(blankForm);
     setShowCreateForm(false);
   };
@@ -62,8 +69,8 @@ export default function AdminPanel() {
       prev.map((e) =>
         e.id === id
           ? { ...e, ...editForm, maxPlayers: Number(editForm.maxPlayers) }
-          : e
-      )
+          : e,
+      ),
     );
     const name = editForm.name;
     logAction(`[${new Date().toLocaleTimeString()}] Updated event: ${name}`);
@@ -90,7 +97,9 @@ export default function AdminPanel() {
   const handleDeleteEvent = (id: string) => {
     const ev = eventList.find((e) => e.id === id)!;
     if (ev.status === "live") {
-      logAction(`[${new Date().toLocaleTimeString()}] BLOCKED: Cannot delete live event: ${ev.name}`);
+      logAction(
+        `[${new Date().toLocaleTimeString()}] BLOCKED: Cannot delete live event: ${ev.name}`,
+      );
       return;
     }
     setEventList((prev) => prev.filter((e) => e.id !== id));
@@ -102,10 +111,16 @@ export default function AdminPanel() {
       prev.map((e) => {
         if (e.id !== id) return e;
         const next =
-          e.status === "upcoming" ? "live" : e.status === "live" ? "completed" : "upcoming";
-        logAction(`[${new Date().toLocaleTimeString()}] Event "${e.name}" status → ${next}`);
+          e.status === "upcoming"
+            ? "live"
+            : e.status === "live"
+              ? "completed"
+              : "upcoming";
+        logAction(
+          `[${new Date().toLocaleTimeString()}] Event "${e.name}" status → ${next}`,
+        );
         return { ...e, status: next };
-      })
+      }),
     );
   };
 
@@ -189,7 +204,10 @@ export default function AdminPanel() {
             sub: "active accounts",
           },
         ].map((card) => (
-          <div key={card.label} className="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div
+            key={card.label}
+            className="bg-gray-900 border border-gray-800 rounded-xl p-4"
+          >
             <p className="text-xs text-gray-500 mb-1">{card.label}</p>
             <p className={`text-2xl font-bold ${card.color}`}>{card.value}</p>
             <p className="text-xs text-gray-600 mt-0.5">{card.sub}</p>
@@ -217,110 +235,114 @@ export default function AdminPanel() {
       {/* ── USER MANAGEMENT TAB ─────────────────────────────────────── */}
       {activeTab === "users" && (
         <>
+          <div className="bg-white border border-gray-200 rounded-xl p-4 mb-4">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search by username or email…"
+              className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-fgcu-emerald"
+            />
+          </div>
 
-      <div className="bg-white border border-gray-200 rounded-xl p-4 mb-4">
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search by username or email…"
-          className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-fgcu-emerald"
-        />
-      </div>
+          {/* User table */}
+          <div className="bg-white border border-gray-200 rounded-xl overflow-x-auto mb-6">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-gray-500 text-xs border-b border-gray-200">
+                  <th className="text-left px-4 py-3">Username</th>
+                  <th className="text-left px-4 py-3">Email</th>
+                  <th className="text-left px-4 py-3">Role</th>
+                  <th className="text-left px-4 py-3">Status</th>
+                  <th className="text-left px-4 py-3">Joined</th>
+                  <th className="text-left px-4 py-3">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.map((u) => (
+                  <tr
+                    key={u.id}
+                    className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+                  >
+                    <td className="px-4 py-3 text-gray-900 font-medium">
+                      {u.username}
+                    </td>
+                    <td className="px-4 py-3 text-gray-600">{u.email}</td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-xs font-medium ${roleColors[u.role]}`}
+                      >
+                        {u.role}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[u.status]}`}
+                      >
+                        {u.status}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-gray-400 text-xs">
+                      {u.joined}
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleBan(u.id)}
+                          disabled={u.role === "admin"}
+                          className="text-xs px-2 py-1 rounded bg-yellow-50 border border-yellow-200 hover:bg-yellow-100 text-yellow-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        >
+                          {u.status === "banned" ? "Unban" : "Ban"}
+                        </button>
+                        <button
+                          onClick={() => handlePromote(u.id)}
+                          disabled={u.role === "admin"}
+                          className="text-xs px-2 py-1 rounded bg-cobalt/8 border border-cobalt/20 hover:bg-cobalt/15 text-cobalt disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        >
+                          Promote
+                        </button>
+                        <button
+                          onClick={() => handleDelete(u.id)}
+                          disabled={u.role === "admin"}
+                          className="text-xs px-2 py-1 rounded bg-red-50 border border-red-200 hover:bg-red-100 text-red-600 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+                {filtered.length === 0 && (
+                  <tr>
+                    <td
+                      colSpan={6}
+                      className="px-4 py-6 text-center text-gray-600"
+                    >
+                      No users found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
 
-      {/* User table */}
-      <div className="bg-white border border-gray-200 rounded-xl overflow-x-auto mb-6">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="text-gray-500 text-xs border-b border-gray-200">
-              <th className="text-left px-4 py-3">Username</th>
-              <th className="text-left px-4 py-3">Email</th>
-              <th className="text-left px-4 py-3">Role</th>
-              <th className="text-left px-4 py-3">Status</th>
-              <th className="text-left px-4 py-3">Joined</th>
-              <th className="text-left px-4 py-3">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((u) => (
-              <tr
-                key={u.id}
-                className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
-              >
-                <td className="px-4 py-3 text-gray-900 font-medium">
-                  {u.username}
-                </td>
-                <td className="px-4 py-3 text-gray-600">{u.email}</td>
-                <td className="px-4 py-3">
-                  <span
-                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${roleColors[u.role]}`}
-                  >
-                    {u.role}
-                  </span>
-                </td>
-                <td className="px-4 py-3">
-                  <span
-                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[u.status]}`}
-                  >
-                    {u.status}
-                  </span>
-                </td>
-                <td className="px-4 py-3 text-gray-400 text-xs">{u.joined}</td>
-                <td className="px-4 py-3">
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => handleBan(u.id)}
-                      disabled={u.role === "admin"}
-                      className="text-xs px-2 py-1 rounded bg-yellow-50 border border-yellow-200 hover:bg-yellow-100 text-yellow-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                    >
-                      {u.status === "banned" ? "Unban" : "Ban"}
-                    </button>
-                    <button
-                      onClick={() => handlePromote(u.id)}
-                      disabled={u.role === "admin"}
-                      className="text-xs px-2 py-1 rounded bg-cobalt/8 border border-cobalt/20 hover:bg-cobalt/15 text-cobalt disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                    >
-                      Promote
-                    </button>
-                    <button
-                      onClick={() => handleDelete(u.id)}
-                      disabled={u.role === "admin"}
-                      className="text-xs px-2 py-1 rounded bg-red-50 border border-red-200 hover:bg-red-100 text-red-600 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-            {filtered.length === 0 && (
-              <tr>
-                <td colSpan={6} className="px-4 py-6 text-center text-gray-600">
-                  No users found.
-                </td>
-              </tr>
+          {/* Action Log — UC-07: every action is logged */}
+          <div className="bg-white border border-gray-200 rounded-xl p-4">
+            <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
+              Action Log (REQ-08)
+            </h2>
+            {actionLog.length === 0 ? (
+              <p className="text-xs text-gray-400">No actions yet.</p>
+            ) : (
+              <ul className="space-y-1">
+                {actionLog.map((entry, i) => (
+                  <li key={i} className="text-xs text-gray-600 font-mono">
+                    {entry}
+                  </li>
+                ))}
+              </ul>
             )}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Action Log — UC-07: every action is logged */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4">
-        <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
-          Action Log (REQ-08)
-        </h2>
-        {actionLog.length === 0 ? (
-          <p className="text-xs text-gray-400">No actions yet.</p>
-        ) : (
-          <ul className="space-y-1">
-            {actionLog.map((entry, i) => (
-              <li key={i} className="text-xs text-gray-600 font-mono">
-                {entry}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+          </div>
         </>
       )}
 
@@ -328,7 +350,9 @@ export default function AdminPanel() {
       {activeTab === "events" && (
         <>
           <div className="flex items-center justify-between mb-4">
-            <p className="text-sm text-gray-500">{eventList.length} total events</p>
+            <p className="text-sm text-gray-500">
+              {eventList.length} total events
+            </p>
             <button
               onClick={() => setShowCreateForm(!showCreateForm)}
               className="px-4 py-1.5 text-sm font-semibold bg-fgcu-emerald hover:bg-fgcu-emerald-hover text-white rounded-lg transition-colors"
@@ -345,51 +369,111 @@ export default function AdminPanel() {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
-                  { label: "Event Name", key: "name", type: "text", placeholder: "Spring Valorant Open" },
-                  { label: "Game", key: "game", type: "text", placeholder: "Valorant" },
-                  { label: "Date & Time", key: "date", type: "text", placeholder: "May 15, 2026 · 3:00 PM" },
-                  { label: "Registration Deadline", key: "registrationDeadline", type: "text", placeholder: "May 13, 2026" },
-                  { label: "Prize Pool", key: "prizePool", type: "text", placeholder: "$500" },
-                  { label: "Max Players", key: "maxPlayers", type: "number", placeholder: "32" },
+                  {
+                    label: "Event Name",
+                    key: "name",
+                    type: "text",
+                    placeholder: "Spring Valorant Open",
+                  },
+                  {
+                    label: "Game",
+                    key: "game",
+                    type: "text",
+                    placeholder: "Valorant",
+                  },
+                  {
+                    label: "Date & Time",
+                    key: "date",
+                    type: "text",
+                    placeholder: "May 15, 2026 · 3:00 PM",
+                  },
+                  {
+                    label: "Registration Deadline",
+                    key: "registrationDeadline",
+                    type: "text",
+                    placeholder: "May 13, 2026",
+                  },
+                  {
+                    label: "Prize Pool",
+                    key: "prizePool",
+                    type: "text",
+                    placeholder: "$500",
+                  },
+                  {
+                    label: "Max Players",
+                    key: "maxPlayers",
+                    type: "number",
+                    placeholder: "32",
+                  },
                 ].map(({ label, key, type, placeholder }) => (
                   <div key={key}>
-                    <label className="block text-xs text-gray-500 mb-1">{label}</label>
+                    <label className="block text-xs text-gray-500 mb-1">
+                      {label}
+                    </label>
                     <input
                       type={type}
-                      value={(form as Record<string, string | number>)[key] as string}
-                      onChange={(e) => setForm((f) => ({ ...f, [key]: e.target.value }))}
+                      value={
+                        (form as Record<string, string | number>)[key] as string
+                      }
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, [key]: e.target.value }))
+                      }
                       placeholder={placeholder}
                       className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-fgcu-emerald"
                     />
                   </div>
                 ))}
                 <div>
-                  <label className="block text-xs text-gray-500 mb-1">Format</label>
+                  <label className="block text-xs text-gray-500 mb-1">
+                    Format
+                  </label>
                   <select
                     value={form.format}
-                    onChange={(e) => setForm((f) => ({ ...f, format: e.target.value }))}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, format: e.target.value }))
+                    }
                     className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-fgcu-emerald"
                   >
-                    {["Single Elimination", "Double Elimination", "Round Robin", "Round Robin + Playoffs", "Group Stage + Bracket", "Free-for-All"].map((opt) => (
-                      <option key={opt} value={opt}>{opt}</option>
+                    {[
+                      "Single Elimination",
+                      "Double Elimination",
+                      "Round Robin",
+                      "Round Robin + Playoffs",
+                      "Group Stage + Bracket",
+                      "Free-for-All",
+                    ].map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
                     ))}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-500 mb-1">Location</label>
+                  <label className="block text-xs text-gray-500 mb-1">
+                    Location
+                  </label>
                   <input
                     type="text"
                     value={form.location}
-                    onChange={(e) => setForm((f) => ({ ...f, location: e.target.value }))}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, location: e.target.value }))
+                    }
                     placeholder="Lutgert Hall – Room 1201"
                     className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-fgcu-emerald"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-500 mb-1">Participation Type</label>
+                  <label className="block text-xs text-gray-500 mb-1">
+                    Participation Type
+                  </label>
                   <select
                     value={form.type}
-                    onChange={(e) => setForm((f) => ({ ...f, type: e.target.value as GameEvent["type"] }))}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        type: e.target.value as GameEvent["type"],
+                      }))
+                    }
                     className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-fgcu-emerald"
                   >
                     <option value="competitive">⚔️ Competitive</option>
@@ -397,10 +481,14 @@ export default function AdminPanel() {
                   </select>
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="block text-xs text-gray-500 mb-1">Description</label>
+                  <label className="block text-xs text-gray-500 mb-1">
+                    Description
+                  </label>
                   <textarea
                     value={form.description}
-                    onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, description: e.target.value }))
+                    }
                     placeholder="Short event description…"
                     rows={2}
                     className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:border-fgcu-emerald resize-none"
@@ -435,29 +523,44 @@ export default function AdminPanel() {
               <tbody>
                 {eventList.map((ev) => (
                   <>
-                    <tr key={ev.id} className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
-                      <td className="px-4 py-3 text-gray-900 font-medium">{ev.name}</td>
+                    <tr
+                      key={ev.id}
+                      className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+                    >
+                      <td className="px-4 py-3 text-gray-900 font-medium">
+                        {ev.name}
+                      </td>
                       <td className="px-4 py-3 text-gray-600">{ev.game}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">{ev.date}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">{ev.location}</td>
-                      <td className="px-4 py-3 text-gray-600">{ev.registeredPlayers}/{ev.maxPlayers}</td>
+                      <td className="px-4 py-3 text-gray-500 text-xs">
+                        {ev.date}
+                      </td>
+                      <td className="px-4 py-3 text-gray-500 text-xs">
+                        {ev.location}
+                      </td>
+                      <td className="px-4 py-3 text-gray-600">
+                        {ev.registeredPlayers}/{ev.maxPlayers}
+                      </td>
                       <td className="px-4 py-3">
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                          ev.type === "competitive"
-                            ? "bg-fgcu-gold/15 text-fgcu-gold"
-                            : "bg-green-100 text-green-700"
-                        }`}>
+                        <span
+                          className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                            ev.type === "competitive"
+                              ? "bg-fgcu-gold/15 text-fgcu-gold"
+                              : "bg-green-100 text-green-700"
+                          }`}
+                        >
                           {ev.type}
                         </span>
                       </td>
                       <td className="px-4 py-3">
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                          ev.status === "live"
-                            ? "bg-yellow-100 text-yellow-700"
-                            : ev.status === "upcoming"
-                            ? "bg-cobalt/10 text-cobalt"
-                            : "bg-gray-100 text-gray-500"
-                        }`}>
+                        <span
+                          className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                            ev.status === "live"
+                              ? "bg-yellow-100 text-yellow-700"
+                              : ev.status === "upcoming"
+                                ? "bg-cobalt/10 text-cobalt"
+                                : "bg-gray-100 text-gray-500"
+                          }`}
+                        >
                           {ev.status}
                         </span>
                       </td>
@@ -465,7 +568,11 @@ export default function AdminPanel() {
                         <div className="flex gap-2">
                           {/* ESPORT-38: edit button */}
                           <button
-                            onClick={() => editingId === ev.id ? setEditingId(null) : startEdit(ev)}
+                            onClick={() =>
+                              editingId === ev.id
+                                ? setEditingId(null)
+                                : startEdit(ev)
+                            }
                             className="text-xs px-2 py-1 rounded bg-fgcu-emerald/10 border border-fgcu-emerald/30 hover:bg-fgcu-emerald/20 text-fgcu-emerald transition-colors"
                           >
                             {editingId === ev.id ? "✕" : "Edit"}
@@ -488,48 +595,114 @@ export default function AdminPanel() {
                     </tr>
                     {/* ESPORT-38: inline edit form row */}
                     {editingId === ev.id && (
-                      <tr key={`${ev.id}-edit`} className="bg-gray-50 border-b border-gray-200">
+                      <tr
+                        key={`${ev.id}-edit`}
+                        className="bg-gray-50 border-b border-gray-200"
+                      >
                         <td colSpan={8} className="px-4 py-4">
                           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-3">
                             {[
-                              { label: "Event Name", key: "name", placeholder: ev.name },
-                              { label: "Game", key: "game", placeholder: ev.game },
-                              { label: "Date & Time", key: "date", placeholder: ev.date },
-                              { label: "Location", key: "location", placeholder: ev.location },
-                              { label: "Prize Pool", key: "prizePool", placeholder: ev.prizePool },
-                              { label: "Reg. Deadline", key: "registrationDeadline", placeholder: ev.registrationDeadline },
+                              {
+                                label: "Event Name",
+                                key: "name",
+                                placeholder: ev.name,
+                              },
+                              {
+                                label: "Game",
+                                key: "game",
+                                placeholder: ev.game,
+                              },
+                              {
+                                label: "Date & Time",
+                                key: "date",
+                                placeholder: ev.date,
+                              },
+                              {
+                                label: "Location",
+                                key: "location",
+                                placeholder: ev.location,
+                              },
+                              {
+                                label: "Prize Pool",
+                                key: "prizePool",
+                                placeholder: ev.prizePool,
+                              },
+                              {
+                                label: "Reg. Deadline",
+                                key: "registrationDeadline",
+                                placeholder: ev.registrationDeadline,
+                              },
                             ].map(({ label, key, placeholder }) => (
                               <div key={key}>
-                                <label className="block text-xs text-gray-500 mb-1">{label}</label>
+                                <label className="block text-xs text-gray-500 mb-1">
+                                  {label}
+                                </label>
                                 <input
                                   type="text"
-                                  value={(editForm as Record<string, string | number>)[key] as string}
-                                  onChange={(e) => setEditForm((f) => ({ ...f, [key]: e.target.value }))}
+                                  value={
+                                    (
+                                      editForm as Record<
+                                        string,
+                                        string | number
+                                      >
+                                    )[key] as string
+                                  }
+                                  onChange={(e) =>
+                                    setEditForm((f) => ({
+                                      ...f,
+                                      [key]: e.target.value,
+                                    }))
+                                  }
                                   placeholder={placeholder}
                                   className="w-full bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-xs text-gray-900 focus:outline-none focus:border-fgcu-emerald"
                                 />
                               </div>
                             ))}
                             <div>
-                              <label className="block text-xs text-gray-500 mb-1">Format</label>
+                              <label className="block text-xs text-gray-500 mb-1">
+                                Format
+                              </label>
                               <select
                                 value={editForm.format}
-                                onChange={(e) => setEditForm((f) => ({ ...f, format: e.target.value }))}
+                                onChange={(e) =>
+                                  setEditForm((f) => ({
+                                    ...f,
+                                    format: e.target.value,
+                                  }))
+                                }
                                 className="w-full bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-xs text-gray-900 focus:outline-none focus:border-fgcu-emerald"
                               >
-                                {["Single Elimination", "Double Elimination", "Round Robin", "Round Robin + Playoffs", "Group Stage + Bracket", "Free-for-All"].map((opt) => (
-                                  <option key={opt} value={opt}>{opt}</option>
+                                {[
+                                  "Single Elimination",
+                                  "Double Elimination",
+                                  "Round Robin",
+                                  "Round Robin + Playoffs",
+                                  "Group Stage + Bracket",
+                                  "Free-for-All",
+                                ].map((opt) => (
+                                  <option key={opt} value={opt}>
+                                    {opt}
+                                  </option>
                                 ))}
                               </select>
                             </div>
                             <div>
-                              <label className="block text-xs text-gray-500 mb-1">Type</label>
+                              <label className="block text-xs text-gray-500 mb-1">
+                                Type
+                              </label>
                               <select
                                 value={editForm.type}
-                                onChange={(e) => setEditForm((f) => ({ ...f, type: e.target.value as GameEvent["type"] }))}
+                                onChange={(e) =>
+                                  setEditForm((f) => ({
+                                    ...f,
+                                    type: e.target.value as GameEvent["type"],
+                                  }))
+                                }
                                 className="w-full bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-xs text-gray-900 focus:outline-none focus:border-fgcu-emerald"
                               >
-                                <option value="competitive">⚔️ Competitive</option>
+                                <option value="competitive">
+                                  ⚔️ Competitive
+                                </option>
                                 <option value="casual">🎉 Casual</option>
                               </select>
                             </div>
@@ -559,7 +732,9 @@ export default function AdminPanel() {
             ) : (
               <ul className="space-y-1">
                 {actionLog.map((entry, i) => (
-                  <li key={i} className="text-xs text-gray-600 font-mono">{entry}</li>
+                  <li key={i} className="text-xs text-gray-600 font-mono">
+                    {entry}
+                  </li>
                 ))}
               </ul>
             )}
@@ -569,4 +744,3 @@ export default function AdminPanel() {
     </Layout>
   );
 }
-
