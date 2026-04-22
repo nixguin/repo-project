@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import fgcuLogo from "../assets/fgcu-logo-250h.jpg";
 
 const navItems = [
   { to: "/dashboard", label: "🎮 Player Dashboard" },
@@ -32,9 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
         <div className="px-5 py-6 flex items-center justify-between">
-          <span className="text-white font-bold text-lg tracking-wide">
-            ⚡ FGCU Esports
-          </span>
+          <img src={fgcuLogo} alt="FGCU" className="h-10 w-auto brightness-0 invert" />
           <button
             onClick={closeSidebar}
             className="md:hidden text-white/50 hover:text-white text-xl leading-none"
@@ -87,7 +86,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           >
             ☰
           </button>
-          <span className="text-white font-bold tracking-wide">⚡ FGCU Esports</span>
+          <img src={fgcuLogo} alt="FGCU" className="h-8 w-auto brightness-0 invert" />
         </header>
         <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
       </div>

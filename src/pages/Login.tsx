@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import fgcuLogo from "../assets/fgcu-logo-250h.jpg";
 
 // ESPORT-13: officer credentials gate
 const OFFICER_EMAILS = ["officer@fgcu.edu", "admin@fgcu.edu", "tk@fgcu.edu"];
@@ -30,11 +31,9 @@ export default function Login() {
     <div className="min-h-screen bg-cobalt flex items-center justify-center px-4">
       <div className="bg-white border border-gray-200 rounded-2xl p-8 w-full max-w-md shadow-xl">
         {/* Logo */}
-        <div className="text-center mb-6">
-          <span className="text-cobalt text-3xl font-extrabold tracking-wider">
-            ⚡ FGCU Esports
-          </span>
-          <p className="text-gray-500 text-sm mt-1">
+        <div className="flex flex-col items-center mb-6">
+          <img src={fgcuLogo} alt="FGCU" className="h-16 w-auto mb-2" />
+          <p className="text-gray-500 text-sm">
             AI-Powered Competitive Gaming Platform
           </p>
         </div>
