@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import Layout from "../components/Layout";
 import { events, type GameEvent } from "../data/mockData";
 
@@ -12,7 +12,7 @@ const statusStyle: Record<GameEvent["status"], string> = {
 
 const statusLabel: Record<GameEvent["status"], string> = {
   upcoming: "Upcoming",
-  live: "ðŸ”´ Live",
+  live: "🔴 Live",
   completed: "Completed",
 };
 
@@ -22,17 +22,17 @@ const typeStyle: Record<GameEvent["type"], string> = {
   casual: "bg-green-100 text-green-700 border border-green-200",
 };
 const typeLabel: Record<GameEvent["type"], string> = {
-  competitive: "âš”ï¸ Competitive",
-  casual: "ðŸŽ‰ Casual",
+  competitive: "⚔️ Competitive",
+  casual: "🎉 Casual",
 };
 
 const gameIcons: Record<string, string> = {
-  Valorant: "ðŸŽ¯",
-  "Rocket League": "ðŸš€",
-  "Super Smash Bros. Ultimate": "ðŸ•¹ï¸",
-  "League of Legends": "âš”ï¸",
-  "Overwatch 2": "ðŸ›¡ï¸",
-  "Mario Kart 8 Deluxe": "ðŸŽï¸",
+  Valorant: "🎯",
+  "Rocket League": "🚀",
+  "Super Smash Bros. Ultimate": "🕹️",
+  "League of Legends": "⚔️",
+  "Overwatch 2": "🛡️",
+  "Mario Kart 8 Deluxe": "🏎️",
 };
 
 export default function EventsPage() {
@@ -102,21 +102,21 @@ export default function EventsPage() {
                   <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
                     isLive ? "bg-yellow-100 text-yellow-700 animate-pulse" : "bg-cobalt/10 text-cobalt"
                   }`}>
-                    {isLive ? "ðŸ”´ HAPPENING NOW" : "â° UP NEXT"}
+                    {isLive ? "🔴 HAPPENING NOW" : "⏰ UP NEXT"}
                   </span>
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${typeStyle[hero.type]}`}>
                     {typeLabel[hero.type]}
                   </span>
                 </div>
                 <h2 className="text-xl font-bold text-cobalt mb-1">
-                  {gameIcons[hero.game] ?? "ðŸŽ®"} {hero.name}
+                  {gameIcons[hero.game] ?? "🎮"} {hero.name}
                 </h2>
                 {/* ESPORT-43: essential details */}
                 <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-600 mt-1">
-                  <span>ðŸ“… {hero.date}</span>
-                  <span>ðŸ“ {hero.location}</span>
-                  <span>ðŸ“‹ {hero.format}</span>
-                  <span>ðŸ† {hero.prizePool}</span>
+                  <span>📅 {hero.date}</span>
+                  <span>📍 {hero.location}</span>
+                  <span>📋 {hero.format}</span>
+                  <span>🏆 {hero.prizePool}</span>
                 </div>
               </div>
               {hero.status !== "completed" && (
@@ -158,7 +158,7 @@ export default function EventsPage() {
                 : "bg-white border border-gray-200 text-gray-600 hover:border-cobalt/40 hover:text-cobalt"
             }`}
           >
-            {f === "competitive" ? "âš”ï¸ Competitive" : f === "casual" ? "ðŸŽ‰ Casual" : f}{" "}
+            {f === "competitive" ? "âš”ï¸ Competitive" : f === "casual" ? "🎉 Casual" : f}{" "}
             <span className="opacity-60">({counts[f]})</span>
           </button>
         ))}
@@ -190,7 +190,7 @@ export default function EventsPage() {
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <span className="text-lg">{gameIcons[ev.game] ?? "ðŸŽ®"}</span>
+                      <span className="text-lg">{gameIcons[ev.game] ?? "🎮"}</span>
                       <h2 className="text-gray-900 font-semibold text-base truncate">{ev.name}</h2>
                       <span className={`px-2 py-0.5 rounded-full text-xs font-medium shrink-0 ${statusStyle[ev.status]}`}>
                         {statusLabel[ev.status]}
@@ -203,10 +203,10 @@ export default function EventsPage() {
                     {/* ESPORT-43: essential event details */}
                     <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-500 mt-1">
 
-                      <span>ðŸ“… {ev.date}</span>
-                      <span>ðŸ“ {ev.location}</span>
-                      <span>ðŸ† {ev.prizePool}</span>
-                      <span>ðŸ“‹ {ev.format}</span>
+                      <span>📅 {ev.date}</span>
+                      <span>📍 {ev.location}</span>
+                      <span>🏆 {ev.prizePool}</span>
+                      <span>📋 {ev.format}</span>
                     </div>
                   </div>
 
