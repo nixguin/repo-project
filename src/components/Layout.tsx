@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 const navItems = [
   { to: "/dashboard", label: "Player Dashboard" },
+  { to: "/events", label: "Events" },
   { to: "/bracket", label: "Tournament Bracket" },
   { to: "/sponsor", label: "Sponsor Analytics" },
   { to: "/admin", label: "Admin Panel" },

@@ -103,3 +103,92 @@ export const adminUsers: AdminUser[] = [
     { id: "u6", username: "ColdSnap", email: "cold@fgcu.edu", role: "player", status: "pending", joined: "Apr 12, 2026" },
     { id: "u7", username: "DustyAim", email: "dusty@fgcu.edu", role: "player", status: "active", joined: "Feb 28, 2026" },
 ];
+
+// ─── Events ────────────────────────────────────────────────────────────────
+export type GameEvent = {
+    id: string;
+    name: string;
+    game: string;
+    date: string;
+    registrationDeadline: string;
+    status: "upcoming" | "live" | "completed";
+    maxPlayers: number;
+    registeredPlayers: number;
+    prizePool: string;
+    format: string;
+    description: string;
+    organizer: string;
+};
+
+export const events: GameEvent[] = [
+    {
+        id: "e1",
+        name: "FGCU Spring Valorant Open",
+        game: "Valorant",
+        date: "Apr 26, 2026 · 12:00 PM",
+        registrationDeadline: "Apr 24, 2026",
+        status: "upcoming",
+        maxPlayers: 32,
+        registeredPlayers: 24,
+        prizePool: "$500",
+        format: "Double Elimination",
+        description: "Open Valorant tournament for all FGCU students. Top 3 teams split the prize pool.",
+        organizer: "TourneyKing",
+    },
+    {
+        id: "e2",
+        name: "Rocket League 2v2 Invitational",
+        game: "Rocket League",
+        date: "Apr 21, 2026 · 3:00 PM",
+        registrationDeadline: "Apr 20, 2026",
+        status: "live",
+        maxPlayers: 16,
+        registeredPlayers: 16,
+        prizePool: "$250",
+        format: "Single Elimination",
+        description: "Fast-paced 2v2 Rocket League showdown. Brackets seeded by rank.",
+        organizer: "TourneyKing",
+    },
+    {
+        id: "e3",
+        name: "Smash Bros Ultimate Weekly #12",
+        game: "Super Smash Bros. Ultimate",
+        date: "Apr 14, 2026 · 6:00 PM",
+        registrationDeadline: "Apr 14, 2026",
+        status: "completed",
+        maxPlayers: 24,
+        registeredPlayers: 24,
+        prizePool: "$100",
+        format: "Double Elimination",
+        description: "Weekly Smash Bros local. Open to all skill levels.",
+        organizer: "TourneyKing",
+    },
+    {
+        id: "e4",
+        name: "League of Legends 5v5 Clash",
+        game: "League of Legends",
+        date: "May 3, 2026 · 2:00 PM",
+        registrationDeadline: "May 1, 2026",
+        status: "upcoming",
+        maxPlayers: 40,
+        registeredPlayers: 10,
+        prizePool: "$750",
+        format: "Round Robin + Playoffs",
+        description: "Team-based LoL tournament. Register a full 5-man roster.",
+        organizer: "TourneyKing",
+    },
+    {
+        id: "e5",
+        name: "Overwatch 2 Campus Cup",
+        game: "Overwatch 2",
+        date: "May 10, 2026 · 1:00 PM",
+        registrationDeadline: "May 7, 2026",
+        status: "upcoming",
+        maxPlayers: 24,
+        registeredPlayers: 6,
+        prizePool: "$300",
+        format: "Group Stage + Bracket",
+        description: "Inter-college Overwatch 2 Cup. Represent FGCU against other Florida schools.",
+        organizer: "TourneyKing",
+    },
+];

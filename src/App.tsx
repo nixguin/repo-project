@@ -4,6 +4,7 @@ import PlayerDashboard from "./pages/PlayerDashboard";
 import TournamentBracket from "./pages/TournamentBracket";
 import SponsorAnalytics from "./pages/SponsorAnalytics";
 import AdminPanel from "./pages/AdminPanel";
+import EventsPage from "./pages/EventsPage";
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<PlayerDashboard />} />
+        <Route path="/events" element={<EventsPage />} />
         <Route path="/bracket" element={<TournamentBracket />} />
         <Route path="/sponsor" element={<SponsorAnalytics />} />
         <Route path="/admin" element={<AdminPanel />} />
